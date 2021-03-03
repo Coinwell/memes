@@ -20,7 +20,7 @@ FROM alpine:latest
 RUN apk add --no-cache ca-certificates openssl
 
 COPY --from=0 /app/n2n2-meme /app/
-COPY --from=0 /app/.env /app/
+# COPY --from=0 /app/.env /app/
 
 EXPOSE 5000
 ENTRYPOINT ["/app/n2n2-meme"]
