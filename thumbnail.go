@@ -16,7 +16,7 @@ import (
 	"github.com/nfnt/resize"
 	"github.com/oliamb/cutter"
 
-	"github.com/stakwork/sphinx-meme/storage"
+	"github.com/n2n2dev/n2n2-meme/storage"
 )
 
 // MigrateThumbnails images

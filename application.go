@@ -7,8 +7,8 @@ import (
 
 	"github.com/joho/godotenv"
 
-	"github.com/stakwork/sphinx-meme/auth"
-	"github.com/stakwork/sphinx-meme/storage"
+	"github.com/n2n2dev/n2n2-meme/auth"
+	"github.com/n2n2dev/n2n2-meme/storage"
 )
 
 func main() {

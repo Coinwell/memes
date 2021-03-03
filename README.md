@@ -1,5 +1,4 @@
-
-![Meme Server](https://github.com/stakwork/sphinx-meme/raw/master/sql/meme-server.png)
+![Meme Server](https://github.com/n2n2dev/n2n2-meme/raw/master/sql/meme-server.png)
 
 # sphinx-meme
 
@@ -7,14 +6,15 @@ Decentralized file server for Sphinx memes, attachments, media, and files. Anyon
 
 Sphinx users can automatically auth with **sphinx-meme** by signing a challenge with their LND key. A JWT is returned, allowing access to upload and download files, and search public media.
 
-File access is granted by *mediaTokens* signed by the owner and passed over the Lightning Network. To buy a piece of media, you can send a *purchase* message to the owner, and if you have paid the correct amount, that user will confirm your payment with a *mediaToken* that can only be used by you:
+File access is granted by _mediaTokens_ signed by the owner and passed over the Lightning Network. To buy a piece of media, you can send a _purchase_ message to the owner, and if you have paid the correct amount, that user will confirm your payment with a _mediaToken_ that can only be used by you:
 
-![Purchase Flow](https://github.com/stakwork/sphinx-meme/raw/master/sql/purchase.jpg)
+![Purchase Flow](https://github.com/n2n2dev/n2n2-meme/raw/master/sql/purchase.jpg)
 
 ### configuring
+
 ```sql
 -- use S3 to store files
-STORAGE_MODE=s3 
+STORAGE_MODE=s3
 S3_KEY=***
 S3_SECRET=***
 
@@ -30,31 +30,36 @@ JWT_KEY=***
 
 -- Postgres url (AWS RDS env vars can also be used)
 DATABASE_URL=***
-````
+```
 
 ### providing access to a file
 
-Files can be accessed with a *mediaToken* from the file owner. For attachments, the *mediaToken* is simply sent in the attachment message. For purchased media, the *mediaToken* is included in the purchase confirmation message. All media access receipts have an expiration time.
+Files can be accessed with a _mediaToken_ from the file owner. For attachments, the _mediaToken_ is simply sent in the attachment message. For purchased media, the _mediaToken_ is included in the purchase confirmation message. All media access receipts have an expiration time.
 
-![Media Token](https://github.com/stakwork/sphinx-meme/raw/master/sql/media_token.png)
+![Media Token](https://github.com/n2n2dev/n2n2-meme/raw/master/sql/media_token.png)
 
 ### authenticating
 
 Authentication is a 3-step process
 
 - GET `/ask` to receive a challenge
+
 ```js
 // result
 {id:'12345',challenge:'67890'}
 ```
 
 - Sign the challenge with LND "SignMessage" rpc call
+
 ```js
 // result
-{signature:'d3ubh75p45d'} // sig is base64 encoded
+{
+  signature: "d3ubh75p45d";
+} // sig is base64 encoded
 ```
 
-- POST `/verify` within 10 seconds *(application/x-www-form-urlencoded)*
+- POST `/verify` within 10 seconds _(application/x-www-form-urlencoded)_
+
 ```js
 // body
 {id:'12345',sig:'d3ubh75p45d',pubkey:'xxxxx'}
@@ -71,6 +76,7 @@ The returned token asserts that you are the owner of the pubkey, and lets you up
 - GET `/file/{mediaToken}`: download the file
 
 - POST `/upload`: the file is hashed with blake2b, and this hash is used as the file key. A SQL record is created with key, name, size, your pubkey, etc.
+
 ```js
 // Content-Type: multipart/form-data
 {
@@ -107,6 +113,6 @@ The returned token asserts that you are the owner of the pubkey, and lets you up
 ### notes
 
 - Purchases and receipts are passed as Lightning Network payments, outside of the scope of this server
-    - When a purchase is made, merchant node should call **/mymedia/{muid}** to confirm the price/TTL, and check that amount was paid before issuing the *receipt*. Afterward merchant node can call **/purchase/{muid}** to update the stats for that media.
-	- Similarly, an attachment message should check TTL before issuing a *mediaToken*
-- If a purchase message does not contain the correct amount, the sats should be returned by the merchant node in the *purchase_deny* message
+  - When a purchase is made, merchant node should call **/mymedia/{muid}** to confirm the price/TTL, and check that amount was paid before issuing the _receipt_. Afterward merchant node can call **/purchase/{muid}** to update the stats for that media.
+  - Similarly, an attachment message should check TTL before issuing a _mediaToken_
+- If a purchase message does not contain the correct amount, the sats should be returned by the merchant node in the _purchase_deny_ message

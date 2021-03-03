@@ -18,11 +18,11 @@ import (
 	"github.com/rs/cors"
 	"golang.org/x/crypto/blake2b"
 
-	"github.com/stakwork/sphinx-meme/auth"
-	"github.com/stakwork/sphinx-meme/ecdsa"
-	"github.com/stakwork/sphinx-meme/frontend"
-	"github.com/stakwork/sphinx-meme/ldat"
-	"github.com/stakwork/sphinx-meme/storage"
+	"github.com/n2n2dev/n2n2-meme/auth"
+	"github.com/n2n2dev/n2n2-meme/ecdsa"
+	"github.com/n2n2dev/n2n2-meme/frontend"
+	"github.com/n2n2dev/n2n2-meme/ldat"
+	"github.com/n2n2dev/n2n2-meme/storage"
 )
 
 // InitRouter creates the chi routes

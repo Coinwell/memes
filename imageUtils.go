@@ -15,7 +15,7 @@ import (
 
 	"golang.org/x/crypto/blake2b"
 
-	"github.com/stakwork/sphinx-meme/storage"
+	"github.com/n2n2dev/n2n2-meme/storage"
 )
 
 func getImageDimension(file io.Reader) (int, int) {

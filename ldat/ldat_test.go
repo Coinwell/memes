@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stakwork/sphinx-meme/ecdsa"
+	"github.com/n2n2dev/n2n2-meme/ecdsa"
 )
 
 func TestTerms(t *testing.T) {

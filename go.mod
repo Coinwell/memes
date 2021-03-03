@@ -1,4 +1,4 @@
-module github.com/stakwork/sphinx-meme
+module github.com/n2n2dev/n2n2-meme
 
 go 1.13
 
