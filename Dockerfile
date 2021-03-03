@@ -1,5 +1,5 @@
 # build stage
-FROM golang as builder
+FROM golang:latest
 
 ENV GO111MODULE=on
 
@@ -19,8 +19,8 @@ FROM alpine:latest
 
 RUN apk add --no-cache ca-certificates openssl
 
-COPY --from=builder /app/sphinx-meme /app/
-COPY --from=builder /app/.env /app/
+COPY --from=0 /app/sphinx-meme /app/
+COPY --from=0 /app/.env /app/
 
 EXPOSE 5000
 ENTRYPOINT ["/app/sphinx-meme"]
