@@ -15,6 +15,9 @@ func main() {
 
 	makeCategoryCodes()
 
+	dbURL := os.Getenv("DATABASE_URL")
+	fmt.Println("dbURL: " + dbURL)
+
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("application.go: no .env file")

@@ -1,0 +1,9 @@
+version: "2"
+
+services:
+  n2n2-meme:
+    image: "n2n2/n2n2-meme"
+    ports:
+      - 80:5000
+    environment:
+      - DATABASE_URL=$DATABASE_URL
