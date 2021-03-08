@@ -6,7 +6,7 @@ locals {
   region = "us-east-1"
 
   git_conn_arn = "arn:aws:codestar-connections:us-east-1:533620758524:connection/803285fa-ac22-4ded-87d2-d58fbcb41685"
-  git_org      = "n2n2"
+  git_org      = "n2n2dev"
   git_repo     = format("%s/%s", local.git_org, "n2n2-meme")
   git_branch = {
     prod = "main"
