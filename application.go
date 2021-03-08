@@ -17,7 +17,7 @@ func main() {
 
 	err := godotenv.Load()
 	if err != nil {
-		fmt.Println("no .env file")
+		fmt.Println("application.go: no .env file")
 	}
 
 	initDB()
