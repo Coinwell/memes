@@ -6,4 +6,13 @@ services:
     ports:
       - 80:5000
     environment:
-      - DATABASE_URL=$DATABASE_URL
+      - STORAGE_MODE=$STORAGE_MODE
+      - S3_KEY=$S3_KEY
+      - S3_SECRET=$S3_SECRET
+      - HOST=$HOST
+      - JWT_KEY=$JWT_KEY
+      - RDS_HOSTNAME=$RDS_HOSTNAME
+      - RDS_PORT=$RDS_PORT
+      - RDS_DB_NAME=$RDS_DB_NAME
+      - RDS_USERNAME=$RDS_USERNAME
+      - RDS_PASSWORD=$RDS_PASSWORD

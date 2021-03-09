@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/joho/godotenv"
-
 	"github.com/n2n2dev/n2n2-meme/auth"
 	"github.com/n2n2dev/n2n2-meme/storage"
 )
@@ -18,10 +16,10 @@ func main() {
 	dbURL := os.Getenv("DATABASE_URL")
 	fmt.Println("dbURL: " + dbURL)
 
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Println("application.go: no .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	fmt.Println("application.go: no .env file")
+	// }
 
 	initDB()
 	auth.Init()
