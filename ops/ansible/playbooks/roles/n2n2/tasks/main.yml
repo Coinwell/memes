@@ -1,0 +1,172 @@
+---
+- name: Print ansible_hostname
+  debug: var=ansible_hostname
+
+- name: Print inventory_hostname
+  debug: var=inventory_hostname
+
+- name: Print ansible_hostname
+  debug: var=ansible_host
+
+###
+- name: Set HOST
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^HOST"
+    line: "HOST={{ inventory_hostname }}"
+  become: yes
+
+- name: Set STORAGE_MODE
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^STORAGE_MODE"
+    line: "STORAGE_MODE={{ memes_storage_mode }}"
+  become: yes
+
+- name: Set S3_KEY
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^S3_KEY"
+    line: "S3_KEY={{ memes_aws_access_key }}"
+  become: yes
+
+- name: Set S3_SECRET
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^S3_SECRET"
+    line: "S3_SECRET={{ memes_aws_secret_key }}"
+  become: yes
+
+- name: Set RDS_HOSTNAME
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^RDS_HOSTNAME"
+    line: "RDS_HOSTNAME={{ memes_rds_hostname }}"
+  become: yes
+
+- name: Set RDS_PORT
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^RDS_PORT"
+    line: "RDS_PORT={{ memes_rds_port }}"
+  become: yes
+
+- name: Set RDS_DB_NAME
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^RDS_DB_NAME"
+    line: "RDS_DB_NAME={{ memes_db_name }}"
+  become: yes
+  when: not hostvars[inventory_hostname].testnet
+
+- name: Set RDS_DB_NAME
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^RDS_DB_NAME"
+    line: "RDS_DB_NAME={{ memes_db_name_staging }}"
+  become: yes
+  when: hostvars[inventory_hostname].testnet
+
+- name: Set RDS_USERNAME
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^RDS_USERNAME"
+    line: "RDS_USERNAME={{ memes_db_username }}"
+  become: yes
+
+- name: Set RDS_PASSWORD
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^RDS_PASSWORD"
+    line: "RDS_PASSWORD={{ memes_db_password }}"
+  become: yes
+
+- name: Set JWT_KEY
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^JWT_KEY"
+    line: "JWT_KEY={{ memes_jwt_key }}"
+  become: yes
+###
+
+- name: Mkdir n2n2 client path dir
+  file:
+    path: "{{ n2n2_path }}"
+    state: directory
+    owner: ubuntu
+  become: true
+  tags: provisioning
+
+- name: add github private ssh key
+  copy: >
+    src=~/.ssh/id_rsa.github
+    dest=/root/.ssh/id_rsa.github
+    owner=root
+    group=root
+    mode=0600
+  become: yes
+
+- name: add github public ssh key
+  copy: >
+    src=~/.ssh/id_rsa.github.pub
+    dest=/root/.ssh/id_rsa.github.pub
+    owner=root
+    group=root
+    mode=0600
+  become: yes
+
+- name: configure ssh to use ansible key for github.com
+  template: >
+    src=templates/ssh_config.j2
+    dest=/root/.ssh/config
+    owner=root
+    group=root
+    mode=0644
+  become: yes
+
+- name: Add and load private key to ssh-agent
+  shell: "eval `ssh-agent -s` && ssh-add /root/.ssh/id_rsa.github"
+  become: yes
+
+- name: Set authorized key took from file
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.github.pub') }}"
+  become: yes
+
+- name: clone a private repository
+  git: >
+    repo=git@github.com:n2n2dev/n2n2-memes.git
+    key_file=/root/.ssh/id_rsa.github
+    dest={{ n2n2_path }}
+    version={{ git_branch }}
+    force=yes
+    update=yes
+  become: yes
+
+- name: Start container
+  shell: "cd /relay && docker-compose up -d"
+  become: yes
