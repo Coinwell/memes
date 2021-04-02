@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -36,6 +35,6 @@ func main() {
 		port = "5000"
 	}
 
-	fmt.Println("serving port " + port)
+	log.Println("serving port " + port)
 	http.ListenAndServe(":"+port, r)
 }

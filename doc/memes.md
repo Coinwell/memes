@@ -6,3 +6,6 @@ sudo -s
 docker exec -it $(docker ps --latest --quiet) sh
 ```
 
+```
+docker kill $(docker ps -q)
+```
