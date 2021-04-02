@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -247,7 +246,6 @@ func uploadTemplate(w http.ResponseWriter, r *http.Request) {
 }
 
 func uploadPublic(w http.ResponseWriter, r *http.Request) {
-	log.Println("uploading")
 	uploadFile(w, r, false, true)
 }
 
@@ -256,6 +254,8 @@ func uploadPublic(w http.ResponseWriter, r *http.Request) {
 func uploadFile(w http.ResponseWriter, r *http.Request, measureDimensions bool, thumb bool) {
 	ctx := r.Context()
 	pubKey := ctx.Value(auth.ContextKey).(string)
+
+	fmt.Print(pubKey)
 
 	fmt.Println("File Upload ===> ")
 
