@@ -35,6 +35,9 @@ func (store s3store) Init() {
 
 	bucket := os.Getenv("S3_BUCKET")
 
+	fmt.Println(s3Key)
+	fmt.Println(bucket)
+
 	space.bucket = connection.Bucket(bucket)
 	space.prefix = ""
 }
