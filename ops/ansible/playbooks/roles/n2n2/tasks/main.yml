@@ -45,6 +45,15 @@
     line: "S3_SECRET={{ memes_aws_secret_key }}"
   become: yes
 
+- name: Set S3_BUCKET
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^S3_BUCKET"
+    line: "S3_BUCKET={{ memes_aws_bucket }}"
+  become: yes
+
 - name: Set RDS_HOSTNAME
   lineinfile:
     dest: /etc/environment

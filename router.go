@@ -256,8 +256,6 @@ func uploadFile(w http.ResponseWriter, r *http.Request, measureDimensions bool, 
 	ctx := r.Context()
 	pubKey := ctx.Value(auth.ContextKey).(string)
 
-	fmt.Print(pubKey)
-
 	fmt.Println("File Upload ===> ")
 
 	// max of 32 MB files?

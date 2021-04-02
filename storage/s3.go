@@ -32,7 +32,10 @@ func (store s3store) Init() {
 	}
 	// https://github.com/goamz/goamz/blob/master/aws/regions.go
 	connection := s3.New(AWSAuth, aws.USEast)
-	space.bucket = connection.Bucket("sphinx-memes")
+
+	bucket := os.Getenv("S3_BUCKET")
+
+	space.bucket = connection.Bucket(bucket)
 	space.prefix = ""
 }
 
