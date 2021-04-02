@@ -43,13 +43,13 @@ func initRouter() *chi.Mux {
 		r.Get("/podcast", getPodcast)
 	})
 
-	// r.Group(func(r chi.Router) {
-	// 	r.Get("/", frontend.IndexRoute)
-	// 	r.Get("/static/*", frontend.StaticRoute)
-	// 	r.Get("/manifest.json", frontend.ManifestRoute)
+	r.Group(func(r chi.Router) {
+		// r.Get("/", frontend.IndexRoute)
+		// r.Get("/static/*", frontend.StaticRoute)
+		// r.Get("/manifest.json", frontend.ManifestRoute)
 
-	// 	r.Get("/public/{muid}", getPublicMedia)
-	// })
+		r.Get("/public/{muid}", getPublicMedia)
+	})
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
