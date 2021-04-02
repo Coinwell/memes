@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/jwtauth"
 	"github.com/rs/cors"
 	"golang.org/x/crypto/blake2b"
 
@@ -56,10 +57,10 @@ func initRouter() *chi.Mux {
 	})
 
 	r.Group(func(r chi.Router) {
-		// r.Use(auth.Verifier(auth.TokenAuth))
-		// r.Use(jwtauth.Authenticator)
-		// r.Use(auth.HostContext)
-		// r.Use(auth.PubKeyContext)
+		r.Use(auth.Verifier(auth.TokenAuth))
+		r.Use(jwtauth.Authenticator)
+		r.Use(auth.HostContext)
+		r.Use(auth.PubKeyContext)
 
 		r.Get("/mymedia", getMyMedia)              // only owner
 		r.Get("/mymedia/{muid}", getMyMediaByMUID) // only owner
