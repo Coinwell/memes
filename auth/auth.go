@@ -56,10 +56,12 @@ func PubKeyContext(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_, claims, _ := jwtauth.FromContext(r.Context())
 		pubKey, ok := claims["key"].(string)
-		if !ok || pubKey == "" {
-			http.Error(w, http.StatusText(401), 401)
-			return
-		}
+
+		// if !ok || pubKey == "" {
+		// 	http.Error(w, http.StatusText(401), 401)
+		// 	return
+		// }
+
 		ctx := context.WithValue(r.Context(), ContextKey, pubKey)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
