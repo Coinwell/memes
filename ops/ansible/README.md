@@ -24,5 +24,9 @@ ansible-playbook -i inventory/hosts playbooks/terminate-cluster.yml
 docker kill $(docker ps -q)
 ```
 
+```
+memes-staging.n2n2.chat
+```
+
 ### Logs
 docker ps -q | xargs -L 1 docker logs -f
