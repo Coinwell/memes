@@ -60,16 +60,16 @@ services:
       - "traefik.enable=true"
 
       # # web : insecure
-      # - "traefik.http.routers.tribes.rule=Host(`$HOST`)"
-      # - "traefik.http.services.tribes.loadbalancer.server.port=$PORT"
-      # - "traefik.http.routers.tribes.entrypoints=web"
+      # - "traefik.http.routers.memes.rule=Host(`$HOST`)"
+      # - "traefik.http.services.memes.loadbalancer.server.port=$PORT"
+      # - "traefik.http.routers.memes.entrypoints=web"
 
       # web : secure
-      - "traefik.http.routers.tribes.rule=Host(`$HOST`)"
-      - "traefik.http.services.tribes.loadbalancer.server.port=$PORT"
-      - "traefik.http.routers.tribes.tls=true"
-      - "traefik.http.routers.tribes.tls.certresolver=myresolver"
-      - "traefik.http.routers.tribes.entrypoints=websecure"
+      - "traefik.http.routers.memes.rule=Host(`$HOST`)"
+      - "traefik.http.services.memes.loadbalancer.server.port=$PORT"
+      - "traefik.http.routers.memes.tls=true"
+      - "traefik.http.routers.memes.tls.certresolver=myresolver"
+      - "traefik.http.routers.memes.entrypoints=websecure"
 
     restart: on-failure
     environment:
