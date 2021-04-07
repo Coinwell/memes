@@ -25,7 +25,7 @@
 - name: Remove host from known_hosts
   known_hosts:
     path: ~/.ssh/known_hosts
-    name: "{{ ec2.instances[0].public_ip_address }}"
+    name: "{{ config.instance_name }}"
     state: "absent"
 
 - name: Remove host from known_hosts
