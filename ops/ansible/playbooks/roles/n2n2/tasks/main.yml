@@ -18,6 +18,33 @@
     line: "HOST={{ inventory_hostname }}"
   become: yes
 
+- name: Set AWS_ACCESS_KEY_ID
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^AWS_ACCESS_KEY_ID"
+    line: "AWS_ACCESS_KEY_ID={{ aws_access_key }}"
+  become: yes
+
+- name: Set AWS_SECRET_ACCESS_KEY
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^AWS_SECRET_ACCESS_KEY"
+    line: "AWS_SECRET_ACCESS_KEY={{ aws_secret_key }}"
+  become: yes
+
+- name: Set AWS_REGION
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^AWS_REGION"
+    line: "AWS_REGION={{ aws_region }}"
+  become: yes
+
 - name: Set STORAGE_MODE
   lineinfile:
     dest: /etc/environment
