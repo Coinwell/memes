@@ -20,7 +20,6 @@ import (
 
 	"github.com/n2n2dev/n2n2-meme/auth"
 	"github.com/n2n2dev/n2n2-meme/ecdsa"
-	"github.com/n2n2dev/n2n2-meme/frontend"
 	"github.com/n2n2dev/n2n2-meme/ldat"
 	"github.com/n2n2dev/n2n2-meme/storage"
 )
@@ -45,11 +44,16 @@ func initRouter() *chi.Mux {
 	})
 
 	r.Group(func(r chi.Router) {
-		r.Get("/", frontend.IndexRoute)
-		r.Get("/static/*", frontend.StaticRoute)
-		r.Get("/manifest.json", frontend.ManifestRoute)
+		// r.Get("/", frontend.IndexRoute)
+		// r.Get("/static/*", frontend.StaticRoute)
+		// r.Get("/manifest.json", frontend.ManifestRoute)
 
 		r.Get("/public/{muid}", getPublicMedia)
+	})
+
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode("up")
 	})
 
 	r.Group(func(r chi.Router) {

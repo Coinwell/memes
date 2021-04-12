@@ -1,24 +1,21 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 	"os"
-
-	"github.com/joho/godotenv"
 
 	"github.com/n2n2dev/n2n2-meme/auth"
 	"github.com/n2n2dev/n2n2-meme/storage"
 )
 
 func main() {
-
 	makeCategoryCodes()
 
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Println("no .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	fmt.Println("application.go: no .env file")
+	// }
 
 	initDB()
 	auth.Init()
@@ -30,6 +27,6 @@ func main() {
 		port = "5000"
 	}
 
-	fmt.Println("serving port " + port)
+	log.Println("serving port " + port)
 	http.ListenAndServe(":"+port, r)
 }

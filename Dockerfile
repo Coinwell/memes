@@ -17,6 +17,9 @@ RUN CGO_ENABLED=0 go build
 # final stage
 FROM alpine:latest
 
+RUN apk --no-cache add vim
+RUN apk --no-cache add bash
+
 RUN apk add --no-cache ca-certificates openssl
 
 COPY --from=0 /app/n2n2-meme /app/

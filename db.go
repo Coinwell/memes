@@ -29,6 +29,9 @@ func initDB() {
 	if dbURL == "" {
 		panic("DB env vars not found")
 	}
+
+	fmt.Println("dbURL: " + dbURL)
+
 	var err error
 	db, err := gorm.Open("postgres", dbURL)
 	db.LogMode(true)
