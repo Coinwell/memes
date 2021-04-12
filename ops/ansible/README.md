@@ -25,6 +25,7 @@ docker kill $(docker ps -q)
 ```
 
 ```
+memes.n2n2.chat
 memes-staging.n2n2.chat
 ```
 
