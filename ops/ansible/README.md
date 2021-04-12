@@ -1,4 +1,4 @@
-# N2N2 Relay Cluster
+# N2N2 Memes Cluster
 
 ## Prerequisites
 ```

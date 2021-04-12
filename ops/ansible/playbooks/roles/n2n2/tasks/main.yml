@@ -216,5 +216,5 @@
   when: hostvars[inventory_hostname].testnet
 
 - name: Start container
-  shell: "cd /relay && docker-compose up -d"
+  shell: "cd {{ n2n2_path }} && docker-compose up -d"
   become: yes
