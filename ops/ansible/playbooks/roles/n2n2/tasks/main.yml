@@ -81,8 +81,19 @@
     create: yes
     state: present
     regexp: "^S3_BUCKET"
+    line: "S3_BUCKET={{ memes_aws_bucket_staging }}"
+  become: yes
+  when: hostvars[inventory_hostname].testnet
+
+- name: Set S3_BUCKET
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^S3_BUCKET"
     line: "S3_BUCKET={{ memes_aws_bucket }}"
   become: yes
+  when: not hostvars[inventory_hostname].testnet
 
 - name: Set RDS_HOSTNAME
   lineinfile:

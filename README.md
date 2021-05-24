@@ -5,6 +5,7 @@
 ## Bash
 ```
 ssh -i ~/.ssh/n2n2 ubuntu@memes-staging.n2n2.chat
+ssh -i ~/.ssh/n2n2 ubuntu@memes.n2n2.chat
 sudo -s
 docker exec -it $(docker ps --latest --quiet) bash
 ```
