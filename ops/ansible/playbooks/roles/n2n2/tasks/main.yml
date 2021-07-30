@@ -5,6 +5,9 @@
 - name: Print inventory_hostname
   debug: var=inventory_hostname
 
+- name: Print testnet information
+  debug: var=hostvars[inventory_hostname].testnet
+
 - name: Print ansible_hostname
   debug: var=ansible_host
 
@@ -78,8 +81,19 @@
     create: yes
     state: present
     regexp: "^S3_BUCKET"
+    line: "S3_BUCKET={{ memes_aws_bucket_staging }}"
+  become: yes
+  when: hostvars[inventory_hostname].testnet
+
+- name: Set S3_BUCKET
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^S3_BUCKET"
     line: "S3_BUCKET={{ memes_aws_bucket }}"
   become: yes
+  when: not hostvars[inventory_hostname].testnet
 
 - name: Set RDS_HOSTNAME
   lineinfile:
@@ -195,7 +209,7 @@
 
 - name: clone a private repository
   git: >
-    repo=git@github.com:n2n2dev/n2n2-memes.git
+    repo=git@github.com:getzion/memes.git
     key_file=/root/.ssh/id_rsa.github
     dest={{ n2n2_path }}
     version={{ git_branch }}
@@ -206,7 +220,7 @@
 
 - name: clone a private repository
   git: >
-    repo=git@github.com:n2n2dev/n2n2-memes.git
+    repo=git@github.com:getzion/memes.git
     key_file=/root/.ssh/id_rsa.github
     dest={{ n2n2_path }}
     version={{ git_branch_staging }}
