@@ -13,8 +13,8 @@ import (
 
 	jwt "github.com/dgrijalva/jwt-go"
 
-	"github.com/n2n2dev/n2n2-meme/auth"
-	"github.com/n2n2dev/n2n2-meme/ecdsa"
+	"github.com/getzion/memes/auth"
+	"github.com/getzion/memes/ecdsa"
 )
 
 // TIMEOUT is the number of seconds until req becomes invalid

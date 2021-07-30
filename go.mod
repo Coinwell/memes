@@ -1,4 +1,4 @@
-module github.com/n2n2dev/n2n2-meme
+module github.com/getzion/memes
 
 go 1.13
 

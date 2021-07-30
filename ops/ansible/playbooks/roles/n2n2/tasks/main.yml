@@ -209,7 +209,7 @@
 
 - name: clone a private repository
   git: >
-    repo=git@github.com:n2n2dev/n2n2-memes.git
+    repo=git@github.com:getzion/memes.git
     key_file=/root/.ssh/id_rsa.github
     dest={{ n2n2_path }}
     version={{ git_branch }}
@@ -220,7 +220,7 @@
 
 - name: clone a private repository
   git: >
-    repo=git@github.com:n2n2dev/n2n2-memes.git
+    repo=git@github.com:getzion/memes.git
     key_file=/root/.ssh/id_rsa.github
     dest={{ n2n2_path }}
     version={{ git_branch_staging }}

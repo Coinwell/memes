@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/n2n2dev/n2n2-meme/auth"
-	"github.com/n2n2dev/n2n2-meme/storage"
+	"github.com/getzion/memes/auth"
+	"github.com/getzion/memes/storage"
 )
 
 func main() {

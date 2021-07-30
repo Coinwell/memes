@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/n2n2dev/n2n2-meme/ecdsa"
+	"github.com/getzion/memes/ecdsa"
 )
 
 func TestTerms(t *testing.T) {
