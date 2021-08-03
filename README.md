@@ -1,11 +1,10 @@
-# n2n2-memes
+# zion-memes
 
 [How To Deploy](ops/ansible/README.md)
 
 ## Bash
 ```
-ssh -i ~/.ssh/n2n2 ubuntu@memes-staging.n2n2.chat
-ssh -i ~/.ssh/n2n2 ubuntu@memes.n2n2.chat
+ssh -i ~/.ssh/zion ubuntu@memes.getzion.com
 sudo -s
 docker exec -it $(docker ps --latest --quiet) bash
 ```

@@ -1,4 +1,4 @@
-# N2N2 Memes Cluster
+# ZION Memes Cluster
 
 ## Prerequisites
 ```
@@ -25,8 +25,8 @@ docker kill $(docker ps -q)
 ```
 
 ```
-memes.n2n2.chat
-memes-staging.n2n2.chat
+memes.getzion.com
+memes-staging.getzion.com
 ```
 
 ### Logs
