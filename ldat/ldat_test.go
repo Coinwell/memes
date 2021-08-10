@@ -13,7 +13,7 @@ func TestTerms(t *testing.T) {
 	muid := "qFSOa50yWeGSG8oelsMvctLYdejPRD090dsypBSx_xg="
 	pk := "A3PKNqMx2P2EfxkJCHFaNJl7Fdw8XVYMoDLPNBL89JTk"
 	var exp uint32 = 1581547570
-	host := "memes.sphinx.chat"
+	host := "memes.getzion.com"
 
 	ldat, err := Start(host, muid, pk, exp)
 	_, err = Parse(ldat)

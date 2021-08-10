@@ -2,10 +2,12 @@ version: "2"
 
 services:
   reverse-proxy:
+    container_name: proxy
+
     # The official v2 Traefik docker image
     image: traefik:v2.2.1
     # Enables the web UI and tells Traefik to listen to docker
-    # command: --configFile=/home/ec2-user/sphinx-deploy/traefik.yaml
+    # command: --configFile=/home/ec2-user/zion-deploy/traefik.yaml
     command:
       - "--log.level=DEBUG"
     ports:
@@ -25,6 +27,17 @@ services:
       - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
       - AWS_REGION=$AWS_REGION
+
+      # - CLOUDFLARE_EMAIL=$CLOUDFLARE_EMAIL
+      # - CLOUDFLARE_API_KEY=$CLOUDFLARE_API_KEY
+      - CLOUDFLARE_DNS_API_TOKEN=$CLOUDFLARE_DNS_API_TOKEN
+      - CLOUDFLARE_ZONE_API_TOKEN=$CLOUDFLARE_ZONE_API_TOKEN
+
+      # - CF_API_EMAIL=$CF_API_EMAIL
+      # - CF_API_KEY=$CF_API_KEY
+      - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
+      - CF_ZONE_API_TOKEN=$CF_ZONE_API_TOKEN
+
     logging:
       options:
         max-size: 10m
@@ -35,12 +48,12 @@ services:
         hard: 1000000
 
   # auth:
-  #   image: sphinx-auth
+  #   image: zion-auth
   #   depends_on:
   #     - reverse-proxy
   #   labels:
   #     - "traefik.enable=true"
-  #     - "traefik.http.routers.auth.rule=Host(`auth.sphinx.chat`)"
+  #     - "traefik.http.routers.auth.rule=Host(`auth.getzion.com`)"
   #     - "traefik.http.services.auth.loadbalancer.server.port=9090"
   #     - "traefik.http.routers.auth.tls=true"
   #     - "traefik.http.routers.auth.tls.certresolver=myresolver"
@@ -52,7 +65,14 @@ services:
   #     - OAUTH_TIMEOUT=$OAUTH_TIMEOUT
 
   memes:
+    container_name: memes
     build: .
+
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+
     depends_on:
       # - auth
       - reverse-proxy

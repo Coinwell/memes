@@ -22,8 +22,8 @@ RUN apk --no-cache add bash
 
 RUN apk add --no-cache ca-certificates openssl
 
-COPY --from=0 /app/zion-memes /app/
+COPY --from=0 /app/memes /app/
 # COPY --from=0 /app/.env /app/
 
 EXPOSE 5000
-ENTRYPOINT ["/app/zion-memes"]
+ENTRYPOINT ["/app/memes"]

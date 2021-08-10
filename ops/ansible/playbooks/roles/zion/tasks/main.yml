@@ -48,6 +48,88 @@
     line: "AWS_REGION={{ aws_region }}"
   become: yes
 
+### CLOUDFLARE
+# - name: Set CF_ZONE_API_TOKEN
+#   lineinfile:
+#     dest: /etc/environment
+#     create: yes
+#     state: present
+#     regexp: "^CF_ZONE_API_TOKEN"
+#     line: "CF_ZONE_API_TOKEN={{ cloudflare_zone_token }}"
+#   become: yes
+
+- name: Set CLOUDFLARE_EMAIL
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^CLOUDFLARE_EMAIL"
+    line: "CLOUDFLARE_EMAIL={{ cloudflare_email }}"
+  become: yes
+
+- name: Set CLOUDFLARE_API_KEY
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^CLOUDFLARE_API_KEY"
+    line: "CLOUDFLARE_API_KEY={{ cloudflare_api_key }}"
+  become: yes
+
+- name: Set CLOUDFLARE_DNS_API_TOKEN
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^CLOUDFLARE_DNS_API_TOKEN"
+    line: "CLOUDFLARE_DNS_API_TOKEN={{ cloudflare_dns_api_token }}"
+  become: yes
+
+- name: Set CLOUDFLARE_ZONE_API_TOKEN
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^CLOUDFLARE_ZONE_API_TOKEN"
+    line: "CLOUDFLARE_ZONE_API_TOKEN={{ cloudflare_zone_api_token }}"
+  become: yes
+
+- name: Set CF_API_EMAIL
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^CF_API_EMAIL"
+    line: "CF_API_EMAIL={{ cloudflare_email }}"
+  become: yes
+
+- name: Set CF_API_KEY
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^CF_API_KEY"
+    line: "CF_API_KEY={{ cloudflare_api_key }}"
+  become: yes
+
+- name: Set CF_DNS_API_TOKEN
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^CF_DNS_API_TOKEN"
+    line: "CF_DNS_API_TOKEN={{ cloudflare_dns_api_token }}"
+  become: yes
+
+- name: Set CF_ZONE_API_TOKEN
+  lineinfile:
+    dest: /etc/environment
+    create: yes
+    state: present
+    regexp: "^CF_ZONE_API_TOKEN"
+    line: "CF_ZONE_API_TOKEN={{ cloudflare_zone_api_token }}"
+  become: yes
+
 - name: Set STORAGE_MODE
   lineinfile:
     dest: /etc/environment
