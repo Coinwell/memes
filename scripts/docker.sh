@@ -2,7 +2,7 @@
 # Bash Menu Script Example
 
 PS3='Please enter your choice: '
-options=("bash" "reset" "logs" "kill" "quit")
+options=("bash" "reset" "logs" "kill" "compose" "quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -26,7 +26,11 @@ do
             echo $cmd
             $cmd            
             ;;
-
+        "compose")
+            cmd="docker-compose up -d"
+            echo $cmd
+            $cmd
+            ;;
         "quit")
             break
             ;;
